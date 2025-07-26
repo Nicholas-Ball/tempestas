@@ -20,4 +20,20 @@ fn test_open() {
         grib_file.get_discipline(),
         tempestas::grib::discipline::Discipline::Meteorological
     );
+
+    dbg!(grib_file.get_length());
+
+    // Get the identification section
+    let mut buf = [0u8; 24];
+    let ident = grib_file.get_identification(&mut buf).unwrap();
+
+    // Check year month day
+    assert_eq!(ident.year, 2025);
+    assert_eq!(ident.month, 7);
+    assert_eq!(ident.day, 16);
+
+    // Check hour minute second
+    assert_eq!(ident.hour, 18);
+    assert_eq!(ident.minute, 0);
+    assert_eq!(ident.second, 0);
 }

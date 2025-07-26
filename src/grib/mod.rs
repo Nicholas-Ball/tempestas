@@ -1,13 +1,16 @@
 /// Represents a GRIB file.
 pub mod discipline;
+pub mod identification;
 pub mod indicator;
 
-use std::io::Read;
+use std::io::{Read, Seek};
 
 use anyhow::Result;
 use rkyv::{Archive, Deserialize, Serialize, rancor::Error};
 
-use crate::grib::{discipline::Discipline, indicator::ArchivedIndicator};
+use crate::grib::{
+    discipline::Discipline, identification::ArchivedIndentification, indicator::ArchivedIndicator,
+};
 
 /// A GribFile is a wrapper around an archived GRIB file and its path.
 #[derive(Archive, Deserialize, Serialize, Clone)]
@@ -49,6 +52,19 @@ impl<'a> GribFile<'a> {
     /// A `Discipline` enum value.
     pub fn get_discipline(&self) -> Discipline {
         Discipline::from_u8(self.indicator.discipline).unwrap()
+    }
+
+    /// Get Identification section of the GRIB file.
+    ///
+    /// # Returns
+    /// A `Result` containing the `Identification` section or an error.
+    pub fn get_identification(&self, buffer: &'a mut [u8]) -> Result<&'a ArchivedIndentification> {
+        let mut file = std::fs::File::open(&self.path)?;
+        file.seek(std::io::SeekFrom::Start(16))?; // Skip the first 16 bytes (Indicator section)
+        file.read_exact(buffer)?;
+
+        // Deserialize the Identification section from the buffer
+        Ok(rkyv::access::<ArchivedIndentification, Error>(buffer)?)
     }
 
     /// Returns the length of the GRIB file in bytes.
