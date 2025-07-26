@@ -1,6 +1,9 @@
 # Tempestas
 The Tempestas project is a Rust library with Python bindings to provide and aid in the devlopement of high preformance meterology and climate models.
 
+## WIP
+This project is a work in progress. Most of the text below is in inticpation of what the project will be.
+
 ## What is Tempestas?
 Tempestas is the Roman goddess of storms, weather, and the sky. The name was chosen to reflect the project's focus on meteorology and climate modeling. It is also latin for "storm," which is fitting for a library that aims to provide high-performance tools for simulating and understanding weather patterns.
 
