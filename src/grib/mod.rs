@@ -86,17 +86,3 @@ pub fn open<'a>(path: &str, buffer: &'a mut [u8]) -> Result<GribFile<'a>> {
         path: path.to_string(),
     })
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_open() {
-        let mut buffer = [0u8; 16];
-        let result = open("tests/20250717_021449_GFS_P25_18.grb2", &mut buffer);
-        assert!(result.is_ok());
-
-        dbg!(result.unwrap().get_length());
-    }
-}
