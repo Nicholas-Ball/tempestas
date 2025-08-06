@@ -10,6 +10,33 @@ Tempestas is designed with the following principles in mind:
 - **Compatibility**: I understand that changing programming languages can be a barrier to entry. Therefore, Tempestas provides Python bindings to make it accessible to a wider audience, including those who may not be familiar with Rust. I also work with NumPy arrays to ensure compatibility with existing Python scientific computing libraries.
 - **Modularity**: The library is designed to be modular, allowing users to pick and choose the components they need for their specific use cases. This modularity also makes it easier to extend the library with new features and functionalities. I even support functions from other libraries to allow for devlopers to slowly migrate to the Rust API.
 
+## Prerequisites
+To use Tempestas, you will need to have the following installed on your system:
+- Rust (version 1.56 or later)
+- Python (version 3.6 or later)
+- Cargo (Rust's package manager)
+- Maturin (for building Python bindings)
+- NumPy (for Python bindings)
+- ArrayFire (optional, for GPU support)
+- Clang (for building the Rust library)
+- CMake (for building the Rust library)
+- Libaec (for building the Rust library)
+
+#### Fedora
+```bash
+sudo dnf install rust python3 python3-devel cargo maturin numpy clang cmake
+```
+#### Ubuntu
+```bash
+sudo apt-get install rustc python3 python3-dev cargo maturin python3-numpy arrayfire libclang-dev cmake libaec-dev
+```
+#### MacOS
+```bash
+brew install rust python3 cargo maturin numpy arrayfire llvm cmake libaec
+```
+
+
+
 ## Why isn't x feature implemented?
 I am a single developer working on this project in my free time. While I strive to implement as many features as possible, there are limitations to what I can achieve. If you have a specific feature request, please open an issue on the GitHub repository, and I will do my best to prioritize it based on demand and feasibility.
 
